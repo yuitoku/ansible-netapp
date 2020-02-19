@@ -1,0 +1,16 @@
+---
+- name: Create NFS server
+  na_ontap_nfs:
+    state: present
+    service_state: started
+    vserver: "{{ nfs.vserver }}"
+    nfsv3: "{{ nfs.nfsv3 | default(omit) }}"
+    nfsv4: "{{ nfs.nfsv4 | default(omit) }}"
+    nfsv41: "{{ nfs.nfsv41 | default(omit) }}"
+    tcp: "{{ nfs.tcp }}"
+    udp: "{{ nfs.udp }}"
+    nfsv4_id_domain: "{{ nfs.nfsv4_id_domain | default(omit) }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

@@ -1,0 +1,13 @@
+---
+- name: Get NetApp Info
+  na_ontap_info:
+    state: info
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  register: ontap_info
+
+- name: Output NetApp info
+  debug:
+    msg: "{{ ontap_info }}"
+

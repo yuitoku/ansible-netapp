@@ -1,0 +1,11 @@
+---
+- name: Create broadcast domain
+  na_ontap_broadcast_domain:
+    state: present
+    name: "{{ broadcast_domain.name }}"
+    mtu: "{{ broadcast_domain.mtu }}"
+    ipspace: "{{ broadcast_domain.ipspace }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

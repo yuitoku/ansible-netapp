@@ -1,0 +1,13 @@
+---
+- name: Create ifgrp
+  na_ontap_net_ifgrp:
+    state: present
+    name: "{{ ifgrp.name }}"
+    node: "{{ ifgrp.node }}"
+    ports: "{{ ifgrp.ports }}"
+    mode: "{{ ifgrp.mode }}"
+    distribution_function: "{{ ifgrp.distribution_function }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

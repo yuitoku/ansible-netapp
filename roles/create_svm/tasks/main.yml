@@ -1,0 +1,15 @@
+---
+- name: Create SVM
+  na_ontap_svm:
+    state: present
+    name: "{{ svm.name }}"
+    root_volume: "{{ svm.root_volume }}"
+    root_volume_aggregate: "{{ svm.root_volume_aggregate }}"
+    root_volume_security_style: "{{ svm.root_volume_security_style }}"
+    language: "{{ svm.language }}"
+    aggr_list: "{{ svm.aggr_list }}"
+    allowed_protocols: "{{ svm.allowed_protocols }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

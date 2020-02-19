@@ -1,0 +1,24 @@
+---
+- hosts: netapp
+  connection: local
+  gather_facts: false
+  roles:
+    #- get_info
+    #- delete_broadcast_domain_port
+    #- create_aggregate
+    #- create_svm
+    #- create_volume
+    #- create_lif
+    #- create_export_policy
+    #- create_snapshot_policy
+    #- create_nfs
+    #- create_cifs
+    #- create_cifs_share
+    #- create_broadcast_domain
+    #- create_broadcast_domain_port
+    #- create_ifgrp
+    - create_vlan
+    #- create_ntp
+    #- create_dns
+    #- modify_network_port
+    

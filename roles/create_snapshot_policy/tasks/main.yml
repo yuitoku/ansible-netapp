@@ -1,0 +1,12 @@
+---
+- name: Create snapshot policy
+  na_ontap_snapshot_policy:
+    state: present
+    name: "{{ snapshot_policy.name }}"
+    schedule: "{{ snapshot_policy.schedule }}"
+    count: "{{ snapshot_policy.count }}"
+    enabled: true
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

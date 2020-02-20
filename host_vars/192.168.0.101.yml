@@ -2,6 +2,7 @@
 hostname: cluster1
 username: admin
 password: XXXXX
+timezone: Asia/Tokyo
 network_port:
   node: cluster1-01
   ports: e0a,e0b
@@ -28,6 +29,13 @@ vlan:
   node: cluster1-01
   vlanid: 100
   parent_interface: a0a
+service_processor:
+  node: cluster1-01
+  address_type: ipv4
+  dhcp: none
+  ip_address: 192.168.0.135
+  netmask: 255.255.255.0
+  gateway_ip_addres: 192.168.0.1
 aggregate:
   name: aggr0_test
   nodes: cluster1-02
@@ -109,4 +117,17 @@ dns:
   vserver: cluster1
   domains: example.com
   nameservers: 192.168.0.253
+autosupport:
+  state: present
+  node_name: cluster1-01
+  mail_hosts: example.com
+  from_address: netapp@example.com
+  to_addresses: test1@example.com,test2@example.com
+  partner_addresses: pertner1@example.com,pertner2@example.com
+  support: true
+  transport: https
+  proxy_url: example.com
+snmp:
+  state: "on"
+  community_name: test_community
 

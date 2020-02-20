@@ -1,0 +1,28 @@
+---
+- name: Check SNMP state
+  na_ontap_command:
+    command: ["options", "-option-name", "snmp.enable"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  register: result
+  changed_when: false
+
+- name: Change SNMP state
+  na_ontap_command:
+    command: ["options", "-option-name", "snmp.enable", "-option-value", "{{ snmp.state }}"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  when: result.msg | regex_replace('^.*\\n\\s+snmp\\.enable\\s+(\\S+).*$', '\\1') != snmp.state
+
+- name: Add SNMP community
+  na_ontap_snmp:
+    state: present
+    access_control: ro
+    community_name: "{{ snmp.community_name }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  when: snmp.state == "on"
+

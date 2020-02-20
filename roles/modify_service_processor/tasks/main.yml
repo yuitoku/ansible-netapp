@@ -1,0 +1,15 @@
+---
+- name: Modify service processor
+  na_ontap_service_processor_network:
+    state: present
+    is_enabled: true
+    node: "{{ service_processor.node }}"
+    address_type: "{{ service_processor.address_type }}"
+    dhcp: "{{ service_processor.dhcp }}"
+    ip_address: "{{ service_processor.ip_address | default(omit) }}"
+    netmask: "{{ service_processor.netmask | default(omit) }}"
+    gateway_ip_address: "{{ service_processor.gateway_ip_address | default(omit) }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

@@ -4,6 +4,7 @@
   gather_facts: false
   roles:
     #- get_info
+    #- set_timezone
     #- delete_broadcast_domain_port
     #- create_aggregate
     #- create_svm
@@ -17,8 +18,12 @@
     #- create_broadcast_domain
     #- create_broadcast_domain_port
     #- create_ifgrp
-    - create_vlan
+    #- create_vlan
+    #- modify_service_processor
     #- create_ntp
     #- create_dns
     #- modify_network_port
+    #- modify_autosupport
+    - set_snmp
+
     

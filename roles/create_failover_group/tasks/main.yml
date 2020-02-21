@@ -1,0 +1,15 @@
+---
+- name: Check failover group
+  na_ontap_aggregate:
+    state: present
+    service_state: online
+    name: "{{ aggregate.name }}"
+    nodes: "{{ aggregate.nodes }}"
+    raid_type: "{{ aggregate.raid_type }}"
+    disk_count: "{{ aggregate.disk_count }}"
+    wait_for_online: true
+    time_out: 300
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

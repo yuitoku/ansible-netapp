@@ -4,26 +4,26 @@
   gather_facts: false
   roles:
     #- get_info
+    #- rename_node
+    #- create_ntp
+    #- create_dns
     #- set_timezone
-    #- delete_broadcast_domain_port
+    #- set_snmp
+    - delete_broadcast_domain_port
+    - create_ifgrp
+    - create_vlan
+    - create_broadcast_domain
+    - create_broadcast_domain_port
+    #- modify_network_port
+    #- create_lif
+    #- modify_service_processor
     #- create_aggregate
     #- create_svm
     #- create_volume
-    #- create_lif
     #- create_export_policy
     #- create_snapshot_policy
     #- create_nfs
     #- create_cifs
     #- create_cifs_share
-    #- create_broadcast_domain
-    #- create_broadcast_domain_port
-    #- create_ifgrp
-    #- create_vlan
-    #- modify_service_processor
-    #- create_ntp
-    #- create_dns
-    #- modify_network_port
     #- modify_autosupport
-    - set_snmp
-
     

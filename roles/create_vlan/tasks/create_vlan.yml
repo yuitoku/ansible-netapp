@@ -1,0 +1,12 @@
+---
+- name: Create VLAN
+  na_ontap_net_vlan:
+    state: present
+    node: "{{ item.node }}"
+    vlanid: "{{ item.vlanid }}"
+    parent_interface: "{{ item.parent_interface }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ vlan }}"
+

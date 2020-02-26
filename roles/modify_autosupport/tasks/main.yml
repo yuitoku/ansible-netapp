@@ -1,16 +1,5 @@
 ---
-- name: Modify autosupport
-  na_ontap_autosupport:
-    state: "{{ autosupport.state }}"
-    node_name: "{{ autosupport.node_name }}"
-    mail_hosts: "{{ autosupport.mail_hosts | default(omit) }}"
-    from_address: "{{ autosupport.from_address | default(omit) }}"
-    to_addresses: "{{ autosupport.to_addresses | default(omit) }}"
-    partner_addresses: "{{ autosupport.partner_addresses | default(omit) }}"
-    support: "{{ autosupport.support | default(omit) }}"
-    transport: "{{ autosupport.transport | default(omit) }}"
-    proxy_url: "{{ autosupport.proxy_url | default(omit) }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import modify_autosupport.yml
+  import_tasks: modify_autosupport.yml
+  tags: na_modify_autosupport
 

@@ -1,11 +1,5 @@
 ---
-- name: Create VLAN
-  na_ontap_net_vlan:
-    state: present
-    node: "{{ vlan.node }}"
-    vlanid: "{{ vlan.vlanid }}"
-    parent_interface: "{{ vlan.parent_interface }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import create_vlan.yml
+  import_tasks: create_vlan.yml
+  tags: na_create_vlan
 

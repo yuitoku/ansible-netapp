@@ -1,0 +1,20 @@
+---
+- name: Create LIF
+  na_ontap_interface:
+    state: present
+    interface_name: "{{ item.name }}"
+    vserver: "{{ item.vserver }}"
+    address: "{{ item.address }}"
+    netmask: "{{ item.netmask }}"
+    home_node: "{{ item.home_node }}"
+    home_port: "{{ item.home_port }}"
+    role: "{{ item.role }}"
+    protocols: "{{ item.protocols | default(omit) }}"
+    failover_policy: "{{ item.failover_policy | default(omit) }}"
+    firewall_policy: "{{ item.firewall_policy | default(omit) }}"
+    is_auto_revert: "{{ item.is_auto_revert | default(omit) }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ lif }}"
+

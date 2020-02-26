@@ -1,25 +1,5 @@
 ---
-- name: Create export policy
-  na_ontap_export_policy:
-    state: present
-    name: "{{ export_policy.name }}"
-    vserver: "{{ export_policy.vserver }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
-
-- name: Set export policy rule
-  na_ontap_export_policy_rule:
-    state: present
-    name: "{{ export_policy.name }}"
-    vserver: "{{ export_policy.vserver }}"
-    rule_index: "{{ export_policy.rule_index | default(omit) }}"
-    client_match: "{{ export_policy.client_match }}"
-    protocol: "{{ export_policy.protocol }}"
-    ro_rule: "{{ export_policy.ro_rule }}"
-    rw_rule: "{{ export_policy.rw_rule }}"
-    super_user_security: "{{ export_policy.super_user_security }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import create_export_policy.yml
+  import_tasks: create_export_policy.yml
+  tags: na_create_export_policy
 

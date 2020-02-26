@@ -1,10 +1,5 @@
 ---
-- name: Create broadcast domain port
-  na_ontap_broadcast_domain_ports:
-    state: present
-    broadcast_domain: "{{ broadcast_domain_port_for_create.broadcast_domain }}"
-    ports: "{{ broadcast_domain_port_for_create.ports }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import create_broadcast_domain_port
+  import_tasks: create_broadcast_domain_port.yml
+  tags: na_create_broadcast_domain_port
 

@@ -1,9 +1,5 @@
 ---
-- name: Rename node
-  na_ontap_node:
-    name: "{{ node.name }}"
-    from_name: "{{ node.from_name }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import rename_node.yml
+  import_tasks: rename_node.yml
+  tags: na_rename_node
 

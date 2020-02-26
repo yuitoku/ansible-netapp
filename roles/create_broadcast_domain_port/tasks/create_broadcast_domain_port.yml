@@ -1,0 +1,11 @@
+---
+- name: Create broadcast domain port
+  na_ontap_broadcast_domain_ports:
+    state: present
+    broadcast_domain: "{{ item.broadcast_domain }}"
+    ports: "{{ item.ports }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ broadcast_domain_port_for_create }}"
+

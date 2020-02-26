@@ -1,0 +1,16 @@
+---
+- name: Create aggregate
+  na_ontap_aggregate:
+    state: present
+    service_state: online
+    name: "{{ item.name }}"
+    nodes: "{{ item.nodes }}"
+    raid_type: "{{ item.raid_type }}"
+    disk_count: "{{ item.disk_count }}"
+    wait_for_online: true
+    time_out: 300
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ aggregate }}"
+

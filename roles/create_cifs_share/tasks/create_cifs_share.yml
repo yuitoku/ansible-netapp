@@ -1,0 +1,13 @@
+---
+- name: Create CIFS share
+  na_ontap_cifs:
+    state: present
+    share_name: "{{ item.name }}"
+    path: "{{ item.path }}"
+    share_properties: "{{ item.properties }}"
+    vserver: "{{ item.vserver }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ cifs_share }}"
+

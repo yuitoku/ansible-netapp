@@ -1,20 +1,5 @@
 ---
-- name: Create volume
-  na_ontap_volume:
-    state: present
-    name: "{{ volume.name }}"
-    aggregate_name: "{{ volume.aggregate_name }}"
-    vserver: "{{ volume.vserver }}"
-    size: "{{ volume.size }}"
-    size_unit: "{{ volume.size_unit }}"
-    type: "{{ volume.type }}"
-    language: "{{ volume.language }}"
-    volume_security_style: "{{ volume.security_style }}"
-    percent_snapshot_space: "{{ volume.percent_snapshot_space }}"
-    junction_path: "{{ volume.junction_path }}"
-    policy: "{{ volume.policy }}"
-    snapshot_policy: "{{ volume.snapshot_policy | default(omit) }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import create_volume.yml
+  import_tasks: create_volume.yml
+  tags: na_create_volume
 

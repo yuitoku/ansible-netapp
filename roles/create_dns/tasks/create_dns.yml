@@ -1,0 +1,12 @@
+---
+- name: Create DNS server and domain
+  na_ontap_dns:
+    state: "{{ dns.state }}"
+    vserver: "{{ dns.vserver }}"
+    domains: "{{ dns.domains }}"
+    nameservers: "{{ dns.nameservers }}"
+    skip_validation: true
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

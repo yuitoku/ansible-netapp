@@ -1,12 +1,5 @@
 ---
-- name: Create CIFS share
-  na_ontap_cifs:
-    state: present
-    share_name: "{{ cifs_share.name }}"
-    path: "{{ cifs_share.path }}"
-    share_properties: "{{ cifs_share.properties }}"
-    vserver: "{{ cifs.vserver }}"
-    hostname: "{{ hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+- name: Import create_cifs_share
+  import_tasks: create_cifs_share.yml
+  tags: na_create_cifs_share
 

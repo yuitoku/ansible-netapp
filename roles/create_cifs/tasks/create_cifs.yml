@@ -1,0 +1,16 @@
+---
+- name: Create CIFS server
+  na_ontap_cifs_server:
+    state: present
+    service_state: started
+    cifs_server_name: "{{ item.name }}"
+    domain: "{{ item.domain | default(omit) }}"
+    admin_user_name: "{{ item.admin_user_name | default(omit) }}"
+    admin_password: "{{ item.admin_password | default(omit) }}"
+    workgroup: "{{ item.workgroup | default(omit) }}"
+    vserver: "{{ item.vserver }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ cifs }}"
+

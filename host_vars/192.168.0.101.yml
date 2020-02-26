@@ -1,7 +1,7 @@
 ---
 hostname: cluster1
 username: admin
-password: Netapp1!
+password: XXXXX
 node:
   - name: cluster1-002
     from_name: cluster1-02
@@ -9,11 +9,6 @@ ntp:
   state: present
   version: auto
   server_name: ntp.nict.jp
-dns:
-  state: present
-  vserver: cluster1
-  domains: demo.netapp.com
-  nameservers: 192.168.0.253
 timezone: Asia/Tokyo
 snmp:
   state: "on"
@@ -24,6 +19,23 @@ snmp:
   host:
     - 192.168.0.102
     - 192.168.0.103
+autosupport:
+  state: present
+  node_name: cluster1-01
+  mail_hosts: example.com
+  from_address: netapp@example.com
+  to_addresses: test1@example.com,test2@example.com
+  partner_addresses: pertner1@example.com,pertner2@example.com
+  support: true
+  transport: https
+  proxy_url: example.com
+service_processor:
+  node: cluster1-01
+  address_type: ipv4
+  dhcp: none
+  ip_address: 192.168.0.132
+  netmask: 255.255.255.0
+  gateway_ip_addres: 192.168.0.1
 broadcast_domain_port_for_delete:
   broadcast_domain: Default
   ports: ["cluster1-01:e0d", "cluster1-01:e0e", "cluster1-01:e0f", "cluster1-01:e0g", "cluster1-002:e0d", "cluster1-002:e0e", "cluster1-002:e0f", "cluster1-002:e0g"]
@@ -37,109 +49,94 @@ vlan:
   - node: cluster1-01
     vlanid: 100
     parent_interface: a0a
-  - node: cluster1-01
-    vlanid: 101
-    parent_interface: a0b
 broadcast_domain:
   - name: Data
     mtu: 1500
-    ipspace: Data  
+    #ipspace: Data  
 broadcast_domain_port_for_create:
-  - broadcast_domain: Data
-    ports: ["cluster1-01:a0a-100", "cluster1-01:a0a-101"]
+  - broadcast_domain: Default
+    ports: ["cluster1-01:a0a-100"]
 network_port:
-  node: cluster1-01
-  ports: e0a,e0b
-  speed_admin: auto
-  flowcontrol_admin: none
-  mtu: 9000
-service_processor:
-  node: cluster1-01
-  address_type: ipv4
-  dhcp: none
-  ip_address: 192.168.0.135
-  netmask: 255.255.255.0
-  gateway_ip_addres: 192.168.0.1
+  - node: cluster1-01
+    ports: e0a,e0b
+    speed_admin: auto
+    flowcontrol_admin: none
+    mtu: 9000
 aggregate:
-  name: aggr0_test
-  nodes: cluster1-02
-  disk_count: 5
-  raid_type: raid_dp
-svm:
-  name: svm_nfs
-  root_volume: svm_nfs_root
-  root_volume_aggregate: aggr0_test
-  root_volume_security_style: unix
-  language: ja_v1
-  aggr_list: aggr0_test
-  allowed_protocols: nfs,cifs
+  - name: aggr0_test
+    nodes: cluster1-002
+    disk_count: 5
+    raid_type: raid_dp
 volume:
-  name: vol1
-  aggregate_name: aggr0_test
-  vserver: svm_nfs
-  size: 5
-  size_unit: gb
-  type: RW
-  language: ja_v1
-  security_style: unix
-  percent_snapshot_space: 0
-  junction_path: /test
-  policy: default
-  snapshot_policy: default
-lif:
-  name: svm_nfs_lif
-  vserver: svm_nfs
-  address: 192.168.0.120
-  netmask: 255.255.255.0
-  home_node: cluster1-02
-  home_port: e0d
-  role: data
-  protocols: nfs
-  failover_policy: system-defined
-  #firewall_policy: mgmt
-  is_auto_revert: false
-export_policy:
-  name: default
-  vserver: svm_nfs
-  rule_index: 1
-  client_match: 0.0.0.0/0
-  protocol: nfs3
-  ro_rule: any
-  rw_rule: any
-  super_user_security: any
-snapshot_policy:
-  name: test_snapshot_policy
-  vserver: svm_nfs
-  schedule: ["hourly", "daily"]
-  count: [6, 2]
-nfs:
-  vserver: svm_nfs
-  nfsv3: enabled
-  nfsv4: disabled
-  nfsv41: disabled
-  tcp: enabled
-  udp: disabled
-  #nfsv4_id_domain: demo.netapp.com
-cifs:
-  name: test_cifs
-  vserver: svm_nfs
-  domain: demo.netapp.com
-  admin_user_name: Administrator
-  admin_password: Netapp1!
-  #workgroup: test
-cifs_share:
-  name: test_share
-  vserver: svm_nfs
-  path: /test
-  properties: oplocks,browsable,changenotify
-autosupport:
+  - name: vol1
+    aggregate_name: aggr0_test
+    vserver: svm_nfs
+    size: 5
+    size_unit: gb
+    type: RW
+    language: ja_v1
+    security_style: unix
+    percent_snapshot_space: 0
+    junction_path: /test
+    policy: default
+    snapshot_policy: default
+svm:
+  - name: svm_nfs
+    root_volume: svm_nfs_root
+    root_volume_aggregate: aggr0_test
+    root_volume_security_style: unix
+    language: ja_v1
+    aggr_list: aggr0_test
+    allowed_protocols: nfs,cifs
+dns:
   state: present
-  node_name: cluster1-01
-  mail_hosts: example.com
-  from_address: netapp@example.com
-  to_addresses: test1@example.com,test2@example.com
-  partner_addresses: pertner1@example.com,pertner2@example.com
-  support: true
-  transport: https
-  proxy_url: example.com
+  vserver: svm_nfs
+  domains: demo.netapp.com
+  nameservers: 192.168.0.253
+lif:
+  - name: svm_nfs_lif
+    vserver: svm_nfs
+    address: 192.168.0.122
+    netmask: 255.255.255.0
+    home_node: cluster1-01
+    home_port: a0a-100
+    role: data
+    protocols: nfs
+    failover_policy: system-defined
+    #firewall_policy: mgmt
+    is_auto_revert: false
+export_policy:
+  - name: default
+    vserver: svm_nfs
+    rule_index: 1
+    client_match: 0.0.0.0/0
+    protocol: nfs3
+    ro_rule: any
+    rw_rule: any
+    super_user_security: any
+snapshot_policy:
+  - name: test_snapshot_policy
+    vserver: svm_nfs
+    schedule: ["hourly", "daily"]
+    count: [6, 2]
+nfs:
+  - vserver: svm_nfs
+    nfsv3: enabled
+    nfsv4: disabled
+    nfsv41: disabled
+    tcp: enabled
+    udp: disabled
+    #nfsv4_id_domain: demo.netapp.com
+cifs:
+  - name: test_cifs
+    vserver: svm_nfs
+    #domain: demo.netapp.com
+    #admin_user_name: Administrator
+    #admin_password: XXXXX
+    workgroup: test
+cifs_share:
+  - name: test_share
+    vserver: svm_nfs
+    path: /test
+    properties: oplocks,browsable,changenotify
 

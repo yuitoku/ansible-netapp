@@ -1,0 +1,14 @@
+---
+- name: Modify network port
+  na_ontap_net_port:
+    state: present
+    node: "{{ item.node }}"
+    ports: "{{ item.ports }}"
+    speed_admin: "{{ item.speed_admin }}"
+    flowcontrol_admin: "{{ item.flowcontrol_admin }}"
+    mtu: "{{ item.mtu }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ network_port }}"
+

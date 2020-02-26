@@ -1,0 +1,18 @@
+---
+- name: Check timezone
+  na_ontap_command:
+    command: ["timezone"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  register: result
+  changed_when: false
+
+- name: Set timezone
+  na_ontap_command:
+    command: ["timezone", "-timezone", "{{ timezone }}"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  when: result.msg | regex_replace('^.*Timezone:\\s(.*)\\n\\n.*$', '\\1') != timezone
+

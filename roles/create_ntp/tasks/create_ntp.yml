@@ -1,0 +1,10 @@
+---
+- name: Create NTP server
+  na_ontap_ntp:
+    state: "{{ ntp.state }}"
+    version: "{{ ntp.version }}"
+    server_name: "{{ ntp.server_name }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

@@ -1,0 +1,27 @@
+---
+- name: Create export policy
+  na_ontap_export_policy:
+    state: present
+    name: "{{ item.name }}"
+    vserver: "{{ item.vserver }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ export_policy }}"
+
+- name: Set export policy rule
+  na_ontap_export_policy_rule:
+    state: present
+    name: "{{ item.name }}"
+    vserver: "{{ item.vserver }}"
+    rule_index: "{{ item.rule_index | default(omit) }}"
+    client_match: "{{ item.client_match }}"
+    protocol: "{{ item.protocol }}"
+    ro_rule: "{{ item.ro_rule }}"
+    rw_rule: "{{ item.rw_rule }}"
+    super_user_security: "{{ item.super_user_security }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ export_policy }}"
+

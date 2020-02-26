@@ -1,0 +1,10 @@
+---
+- name: Rename node
+  na_ontap_node:
+    name: "{{ item.name }}"
+    from_name: "{{ item.from_name }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ node }}"
+

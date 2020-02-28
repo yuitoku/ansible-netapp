@@ -4,6 +4,7 @@
     state: present
     node: "{{ item.node }}"
     ports: "{{ item.ports }}"
+    autonegotiate_admin: "{{ item.autonegotiate_admin }}"
     speed_admin: "{{ item.speed_admin }}"
     flowcontrol_admin: "{{ item.flowcontrol_admin }}"
     mtu: "{{ item.mtu }}"

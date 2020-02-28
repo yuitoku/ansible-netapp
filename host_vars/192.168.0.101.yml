@@ -6,9 +6,7 @@ node:
   - name: cluster1-002
     from_name: cluster1-02
 ntp:
-  state: present
-  version: auto
-  server_name: ntp.nict.jp
+  - server_name: ntp.nict.jp
 timezone: Asia/Tokyo
 snmp:
   state: "on"
@@ -30,19 +28,19 @@ autosupport:
   transport: https
   proxy_url: example.com
 service_processor:
-  node: cluster1-01
-  address_type: ipv4
-  dhcp: none
-  ip_address: 192.168.0.132
-  netmask: 255.255.255.0
-  gateway_ip_addres: 192.168.0.1
+  - node: cluster1-01
+    address_type: ipv4
+    dhcp: none
+    ip_address: 192.168.0.132
+    netmask: 255.255.255.0
+    gateway_ip_address: 192.168.0.1
 broadcast_domain_port_for_delete:
   broadcast_domain: Default
   ports: ["cluster1-01:e0d", "cluster1-01:e0e", "cluster1-01:e0f", "cluster1-01:e0g", "cluster1-002:e0d", "cluster1-002:e0e", "cluster1-002:e0f", "cluster1-002:e0g"]
 ifgrp:
   - name: a0a
     node: cluster1-01
-    ports: [e0e, e0f]
+    ports: ["e0e", "e0f"]
     mode: singlemode
     distribution_function: port
 vlan:
@@ -58,17 +56,18 @@ broadcast_domain_port_for_create:
     ports: ["cluster1-01:a0a-100"]
 network_port:
   - node: cluster1-01
-    ports: e0a,e0b
+    ports: ["e0c", "e0d"]
+    autonegotiate_admin: "true"
     speed_admin: auto
     flowcontrol_admin: none
-    mtu: 9000
+    mtu: 1500
 aggregate:
   - name: aggr0_test
     nodes: cluster1-002
     disk_count: 5
     raid_type: raid_dp
 volume:
-  - name: vol1
+  - name: vol2
     aggregate_name: aggr0_test
     vserver: svm_nfs
     size: 5
@@ -77,7 +76,7 @@ volume:
     language: ja_v1
     security_style: unix
     percent_snapshot_space: 0
-    junction_path: /test
+    #junction_path: /test
     policy: default
     snapshot_policy: default
 svm:
@@ -89,10 +88,10 @@ svm:
     aggr_list: aggr0_test
     allowed_protocols: nfs,cifs
 dns:
-  state: present
-  vserver: svm_nfs
-  domains: demo.netapp.com
-  nameservers: 192.168.0.253
+  - state: present
+    vserver: svm_nfs
+    domains: demo.netapp.com
+    nameservers: 192.168.0.253
 lif:
   - name: svm_nfs_lif
     vserver: svm_nfs

@@ -11,7 +11,7 @@
     language: "{{ item.language }}"
     volume_security_style: "{{ item.security_style }}"
     percent_snapshot_space: "{{ item.percent_snapshot_space }}"
-    junction_path: "{{ item.junction_path }}"
+    junction_path: "{{ item.junction_path | default(omit) }}"
     policy: "{{ item.policy }}"
     snapshot_policy: "{{ item.snapshot_policy | default(omit) }}"
     hostname: "{{ hostname }}"

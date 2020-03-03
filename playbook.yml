@@ -19,6 +19,7 @@
     - create_aggregate
     - create_svm
     - create_dns
+    - create_failover_group
     - create_export_policy
     - create_snapshot_policy
     - create_volume

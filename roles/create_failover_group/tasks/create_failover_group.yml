@@ -1,0 +1,27 @@
+---
+- name: Check failover group
+  na_ontap_command:
+    command: ["network", "interface", "failover-groups", "show", "-failover-group", "{{ failovergroup.name }}"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  changed_when: false
+  register: result
+
+- debug:
+    msg: "{{ result.msg }}"
+
+- name: Create failover group
+  na_ontap_command:
+    command: ["network", "interface", "failover-groups", "create", "-vserver", "{{ failovergroup.vserver }}", "-failover-group", "{{ failovergroup.name }}", "-targets", "{{ failovergroup.targets[0] }}"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  when: not result.msg | regex_search((failovergroup.name))
+
+- name: Import add_target.yml
+  include_tasks: add_target.yml
+  with_items: "{{ failovergroup.targets }}"
+  loop_control:
+    loop_var: target
+

@@ -1,0 +1,7 @@
+---
+- name: Import create_failover_group
+  include_tasks: create_failover_group.yml
+  with_items: "{{ failover_group }}"
+  loop_control:
+    loop_var: failovergroup
+

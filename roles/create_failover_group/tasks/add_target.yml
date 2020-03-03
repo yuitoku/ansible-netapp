@@ -1,0 +1,18 @@
+---
+- name: Check target
+  na_ontap_command:
+    command: ["network", "interface", "failover-groups", "show", "-failover-group", "{{ failovergroup.name }}"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  changed_when: false
+  register: result
+
+- name: Add target
+  na_ontap_command:
+    command: ["network", "interface", "failover-groups", "add-targets", "-vserver", "{{ failovergroup.vserver }}", "-failover-group", "{{ failovergroup.name }}", "-targets", "{{ target }}"]
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  when: not result.msg | regex_search((target))
+

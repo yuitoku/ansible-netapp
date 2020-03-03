@@ -9,6 +9,7 @@
     - set_timezone
     - set_snmp
     - modify_autosupport
+    - create_job
     #- modify_service_processor
     - delete_broadcast_domain_port
     - create_ifgrp

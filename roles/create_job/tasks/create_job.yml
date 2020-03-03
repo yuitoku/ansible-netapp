@@ -1,0 +1,15 @@
+---
+- name: Create job
+  na_ontap_job_schedule:
+    state: present
+    name: "{{ item.name }}"
+    job_minutes: "{{ item.minutes }}"
+    job_hours: "{{ item.hours | default(omit) }}"
+    job_days_of_month: "{{ item.days_of_month | default(omit) }}"
+    job_days_of_week: "{{ item.days_of_week | default(omit) }}"
+    job_months: "{{ item.months | default(omit) }}"
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+  with_items: "{{ job }}"
+

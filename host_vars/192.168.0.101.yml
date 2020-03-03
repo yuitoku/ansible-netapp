@@ -27,6 +27,13 @@ autosupport:
   support: true
   transport: https
   proxy_url: example.com
+job:
+  - name: test_job
+    minutes: 15
+    #hours: 6
+    #days_of_month: 1
+    #days_of_week: 5
+    #months: 2
 service_processor:
   - node: cluster1-01
     address_type: ipv4

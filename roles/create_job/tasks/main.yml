@@ -1,0 +1,5 @@
+---
+- name: Import create_job.yml
+  import_tasks: create_job.yml
+  tags: na_create_job
+

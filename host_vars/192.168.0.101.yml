@@ -1,7 +1,7 @@
 ---
 hostname: cluster1
 username: admin
-password: Netapp1!
+password: XXXXX
 node:
   - name: cluster1-002
     from_name: cluster1-02
@@ -145,7 +145,7 @@ cifs:
     vserver: svm_nfs
     #domain: demo.netapp.com
     #admin_user_name: Administrator
-    #admin_password: Netapp1!
+    #admin_password: XXXXX
     workgroup: test
 cifs_share:
   - name: test_share
